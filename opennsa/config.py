@@ -33,6 +33,7 @@ BLOCK_ARGIA      = 'argia'
 BLOCK_BROCADE    = 'brocade'
 BLOCK_DELL       = 'dell'
 BLOCK_NCSVPN     = 'ncsvpn'
+BLOCK_OESS       = 'oess'
 
 # service block
 NETWORK_NAME     = 'network'     # mandatory
@@ -108,6 +109,11 @@ NCS_SERVICES_URL        = 'url'
 NCS_USER                = 'user'
 NCS_PASSWORD            = 'password'
 
+#OESS Backend
+OESS_URL                = 'url'
+OESS_USER               = 'user'
+OESS_PASS               = 'password'
+OESS_WORKGROUP          = 'OpenNSA'
 
 
 class ConfigurationError(Exception):
@@ -273,7 +279,7 @@ def readVerifyConfig(cfg):
         if name in backends:
             raise ConfigurationError('Can only have one backend named "%s"' % name)
 
-        if backend_type in (BLOCK_DUD, BLOCK_JUNIPER_EX, BLOCK_JUNOS, BLOCK_FORCE10, BLOCK_BROCADE, BLOCK_DELL, BLOCK_NCSVPN):
+        if backend_type in (BLOCK_DUD, BLOCK_JUNIPER_EX, BLOCK_JUNOS, BLOCK_FORCE10, BLOCK_BROCADE, BLOCK_DELL, BLOCK_NCSVPN, BLOCK_OESS):
             backend_conf = dict( cfg.items(section) )
             backend_conf['_backend_type'] = backend_type
             backends[name] = backend_conf
